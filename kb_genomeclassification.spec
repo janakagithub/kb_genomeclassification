@@ -193,7 +193,7 @@ module kb_genomeclassification {
         string phenotypeclass;
         string shock_id;
         string list_name;
-        int RAST_Annotated;
+        int Annotated;
     } ClassifierPredictionInput;
 
 
@@ -215,7 +215,7 @@ module kb_genomeclassification {
         string training_set_out;
         string target;
         string Upload_File;
-        int RAST_Annotated;
+        int Annotated;
         string list_name;
     }UploadTrainingSetInput;
 

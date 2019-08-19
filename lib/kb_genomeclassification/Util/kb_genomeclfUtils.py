@@ -104,9 +104,9 @@ class kb_genomeclfUtils(object):
 		#print "Below is the classifierAdvanced_params"
 		#print(self.editBuildArguments(params)["classifierAdvanced_params"])
 
-		toEdit_all_classifications, training_set_ref, num_classes = self.unloadGenomeClassifierTrainingSet(current_ws, params['trainingset_name'])
+		toEdit_all_classifications, training_set_ref, num_classes, listOfRefs = self.unloadGenomeClassifierTrainingSet(current_ws, params['trainingset_name'])
 		listOfNames, all_classifications = self.intake_method(toEdit_all_classifications)
-		all_attributes, master_Role = self.get_wholeClassification(listOfNames, current_ws, params['attribute'])
+		all_attributes, master_Role = self.get_wholeClassification(listOfNames, current_ws, params['attribute'], refs = listOfRefs)
 	
 
 		if params.get('save_ts') != 1:
@@ -374,13 +374,13 @@ class kb_genomeclfUtils(object):
 			print("this is toEdit_all_classifications")
 			print(toEdit_all_classifications)
 			
-			(missingGenomes, inKBASE) = self.createGenomeClassifierTrainingSet(current_ws, params['RAST_Annotated'], just_DF = toEdit_all_classifications, for_predict = True)
+			(missingGenomes, inKBASE) = self.createGenomeClassifierTrainingSet(current_ws, params['Annotated'], just_DF = toEdit_all_classifications, for_predict = True)
 			#Will error out if inKBASE == 0
 			all_attributes = self.get_wholeClassification(inKBASE, current_ws, params['attribute'], master_Role = master_Role ,for_predict = True)
 		else:
 			file_path = self._download_shock(params.get('shock_id'))
 			#listOfNames, all_classifications = self.intake_method(just_DF = pd.read_excel(file_path))
-			(missingGenomes, inKBASE)  = self.createGenomeClassifierTrainingSet(current_ws,params['RAST_Annotated'], just_DF = pd.read_excel(file_path, dtype=str), for_predict = True)
+			(missingGenomes, inKBASE)  = self.createGenomeClassifierTrainingSet(current_ws,params['Annotated'], just_DF = pd.read_excel(file_path, dtype=str), for_predict = True)
 			#Will error out if inKBASE == 0
 			all_attributes = self.get_wholeClassification(inKBASE, current_ws, params['attribute'], master_Role = master_Role ,for_predict = True)
 
@@ -389,7 +389,7 @@ class kb_genomeclfUtils(object):
 		# 	print ("taking this path rn")
 		# 	print(params)
 		# 	toEdit_all_classifications = self.incaseList_Names(params.get('list_name'))
-		# 	(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['RAST_Annotated'], just_DF = toEdit_all_classifications, for_predict = True)
+		# 	(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['Annotated'], just_DF = toEdit_all_classifications, for_predict = True)
 		# 	#self.newReferencetoGenome(current_ws, params['description'], params['training_set_out'], inKBASE, inKBASE_Classification)
 		# 	#self.workRAST(current_ws, just_DF = toEdit_all_classifications)
 		# 	#listOfNames, all_classifications = self.intake_method(toEdit_all_classifications)
@@ -398,7 +398,7 @@ class kb_genomeclfUtils(object):
 		# 	print("printing the params to see RAST")
 		# 	print(params)
 		# 	#file_path = self._download_shock(params.get('shock_id'))
-		# 	(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['RAST_Annotated'], just_DF = pd.read_excel(file_path), for_predict = True)
+		# 	(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['Annotated'], just_DF = pd.read_excel(file_path), for_predict = True)
 		# 	#self.newReferencetoGenome(current_ws, params['description'], params['training_set_out'], inKBASE, inKBASE_Classification)
 		# 	#self.workRAST(current_ws, just_DF = pd.read_excel(file_path))
 		# 	#listOfNames, all_classifications = self.intake_method(just_DF = pd.read_excel(file_path))
@@ -456,7 +456,7 @@ class kb_genomeclfUtils(object):
 			print ("taking this path rn")
 			print(params)
 			toEdit_all_classifications = self.incaseList_Names(params.get('list_name'))
-			(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['RAST_Annotated'], just_DF = toEdit_all_classifications)
+			(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['Annotated'], just_DF = toEdit_all_classifications)
 			self.newReferencetoGenome(current_ws, params['description'], params['training_set_out'], inKBASE, inKBASE_Classification)
 			#self.workRAST(current_ws, just_DF = toEdit_all_classifications)
 			#listOfNames, all_classifications = self.intake_method(toEdit_all_classifications)
@@ -465,7 +465,7 @@ class kb_genomeclfUtils(object):
 			print("printing the params to see RAST")
 			print(params)
 			#file_path = self._download_shock(params.get('shock_id'))
-			(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['RAST_Annotated'], just_DF = pd.read_excel(os.path.join(os.path.sep,"staging",file_path)))
+			(missingGenomes, inKBASE, inKBASE_Classification) = self.createGenomeClassifierTrainingSet(current_ws,params['Annotated'], just_DF = pd.read_excel(os.path.join(os.path.sep,"staging",file_path)))
 			self.newReferencetoGenome(current_ws, params['description'], params['training_set_out'], inKBASE, inKBASE_Classification)
 			#self.workRAST(current_ws, just_DF = pd.read_excel(file_path))
 			#listOfNames, all_classifications = self.intake_method(just_DF = pd.read_excel(file_path))
@@ -1073,7 +1073,7 @@ class kb_genomeclfUtils(object):
 
 	# 	return missingGenomes
 
-	def createGenomeClassifierTrainingSet(self, current_ws, RAST_Annotated, just_DF, for_predict = False):
+	def createGenomeClassifierTrainingSet(self, current_ws, Annotated, just_DF, for_predict = False):
 		"""
 		args:
 		---current_ws is same as before
@@ -1122,7 +1122,7 @@ class kb_genomeclfUtils(object):
 		if(for_predict):
 			for index in range(len(listGNames)):
 				try:
-					if(RAST_Annotated==1):
+					if(Annotated==1):
 						position = list_allGenomesinWS.index(listGNames[index])
 						inKBASE.append(listGNames[index])
 
@@ -1189,10 +1189,10 @@ class kb_genomeclfUtils(object):
 				print('printing positions')
 				print(position)
 
-				print("This is my RAST_Annotated value")
-				print(RAST_Annotated)
+				print("This is my Annotated value")
+				print(Annotated)
 
-				if(RAST_Annotated == 0):
+				if(Annotated == 0):
 
 					params_RAST =	{
 					"workspace": current_ws,#"sagoyal:narrative_1536939130038",
@@ -1327,11 +1327,13 @@ class kb_genomeclfUtils(object):
 		iterations = len(trainingset_object)
 
 		listGNames = [] #just_DF['Genome_ID']
+		listrefs = []
 		listClassification = [] #just_DF['Classification']
 
 		for example in range(iterations):
 			print(trainingset_object[example]['genome_name'])
 			listGNames.append(trainingset_object[example]['genome_name'])
+			listrefs.append(trainingset_object[example]['genome_ref'])
 			listClassification.append(trainingset_object[example]['genome_classification'])
 
 		print(listGNames)
@@ -1345,7 +1347,7 @@ class kb_genomeclfUtils(object):
 
 		remadeDF = pd.DataFrame.from_dict(detailsDF)
 
-		return remadeDF, training_set_ref, numClasses
+		return remadeDF, training_set_ref, numClasses, listrefs
 
 	def intake_method(self, just_DF, for_predict = False):
 		"""
@@ -1379,7 +1381,7 @@ class kb_genomeclfUtils(object):
 			return list(my_all_classifications.index)
 
 
-	def get_wholeClassification(self, listOfNames, current_ws, search_attribute, master_Role = None, for_predict = False):
+	def get_wholeClassification(self, listOfNames, current_ws, search_attribute, refs = None, master_Role = None, for_predict = False):
 		"""
 		args:
 		---listOfNames is a list from the dataframe.index containing the 'rows' which is names/Genome_ID
@@ -1414,12 +1416,13 @@ class kb_genomeclfUtils(object):
 			search = 'protein_translation'
 
 
-		for current_gName in listOfNames:
+		# for current_gName in listOfNames:
+		for current_ref, current_gName in izip(refs, listOfNames):
 			listOfFunctionalRoles = []
 			try:
 				#functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['cdss']
-				functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['non_coding_features']
-
+				#functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['non_coding_features']
+				functionList = self.ws_client.get_objects2({'objects' : [{'ref' : current_ref}]})['data'][0]['data']['non_coding_features']
 
 				print("here is functionList")
 
@@ -1454,7 +1457,9 @@ class kb_genomeclfUtils(object):
 				# 			listOfFunctionalRoles.append(str(functionList[function]['functions'][0]))
 
 			except:
-				functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['features']
+				functionList = self.ws_client.get_objects2({'objects' : [{'ref' : current_ref}]})['data'][0]['data']['features']
+				#['data'][0]['data']['features']
+				#functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['features']
 				# functionList = self.ws_client.get_objects([{'workspace':current_ws, 'name':current_gName}])[0]['data']['non_coding_features']
 
 
@@ -1922,7 +1927,7 @@ class kb_genomeclfUtils(object):
 			'classifier_type' : classifier_type, # Neural network
 			'classifier_name' : classifier_name,
 			#'classifier_data' : pickled,
-			'classifier_handle_ref' : shock_id,
+			'classifier_handle_ref' : handle_id,
 			'classifier_description' : description,
 			'lib_name' : 'sklearn',
 			'attribute_type' : 'functional_roles',
@@ -2657,7 +2662,7 @@ class kb_genomeclfUtils(object):
 		"""
 		dir_path = self._make_dir()
 
-		file_path = self.dfu.shock_to_file({'shock_id': shock_id, #also takes handles
+		file_path = self.dfu.shock_to_file({'handle_id': shock_id, #also takes handles
 											'file_path': dir_path})['file_path']
 
 		return file_path

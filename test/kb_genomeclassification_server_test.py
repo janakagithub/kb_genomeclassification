@@ -82,7 +82,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
     def test_predict_phenotype(self):
         """
         params = {        
-        "RAST_Annotated": 1,
+        "Annotated": 1,
         "shock_id": "",
         "list_name": "Genome_ID	Classification\n262543.4	facultative\n1134785.3	facultative\n269798.12	aerobic\n309807.19	aerobic\n411154.5	aerobic\n485917.5	aerobic\n485918.5	aerobic\n457391.3	anaerobic\n470145.6	anaerobic\n665954.3	anaerobic\n679190.3	anaerobic",
         "description": "myFullGotest",
@@ -95,7 +95,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         
         """
         params = {
-        "RAST_Annotated": 1,
+        "Annotated": 1,
         "shock_id": "a753ec76-df84-4447-95f5-7186a755fc3b",
         "list_name": "",
         "description": "myFullGoFail",
@@ -106,17 +106,18 @@ class kb_genomeclassificationTest(unittest.TestCase):
         }
         """
 
-        params = {
-        "RAST_Annotated": 1,
-        "list_name": "Genome_ID\n204669.6\n234267.13\n240015.3\n1806.1",
-        "description": "Genomes to Predict",
-        "classifier_name": "Respiration_SVM",
-        "attribute": "functional_roles",
-        "phenotypeclass": "Respiration",
-        "workspace" : "janakakbase:narrative_1507002735148"
-        }
-        self.getImpl().predict_phenotype(self.getContext(), params)
+        # params = {
+        # "Annotated": 1,
+        # "list_name": "Genome_ID\n204669.6\n234267.13\n240015.3\n1806.1",
+        # "description": "Genomes to Predict",
+        # "classifier_name": "Respiration_SVM",
+        # "attribute": "functional_roles",
+        # "phenotypeclass": "Respiration",
+        # "workspace" : "janakakbase:narrative_1507002735148"
+        # }
+        # self.getImpl().predict_phenotype(self.getContext(), params)
  
+        pass
 
     def test_build_classifier(self):
     
@@ -236,25 +237,24 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # "workspace" : "sagoyal:narrative_1536939130038"
         # }
 
-        # params = {
-        # "save_ts": 1,
-        # "description": "mywaydescription",
-        # "trainingset_name": "myWayTSEt",
-        # "phenotypeclass": "myway",
-        # "classifier": "run_all",
-        # "attribute": "functional_roles",
-        # "k_nearest_neighbors": None,
-        # "gaussian_nb": None,
-        # "logistic_regression": None,
-        # "decision_tree_classifier": None,
-        # "support_vector_machine": None,
-        # "neural_network": None,
-        # "ensemble_model": None,
-        # "classifier_out": "myWayCLF",
-        # "workspace" : "sagoyal:narrative_1536939130038"
-        # }
-        # self.getImpl().build_classifier(self.getContext(), params)
-        pass
+        params = {
+        "save_ts": 1,
+        "description": "mywaydescription",
+        "trainingset_name": "myWayTSEt",
+        "phenotypeclass": "myway",
+        "classifier": "run_all",
+        "attribute": "functional_roles",
+        "k_nearest_neighbors": None,
+        "gaussian_nb": None,
+        "logistic_regression": None,
+        "decision_tree_classifier": None,
+        "support_vector_machine": None,
+        "neural_network": None,
+        "ensemble_model": None,
+        "classifier_out": "myWayCLF",
+        "workspace" : "sagoyal:narrative_1536939130038"
+        }
+        self.getImpl().build_classifier(self.getContext(), params)
         
 
     def test_upload_trainingset(self):
@@ -282,7 +282,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         
         """
         params = {
-        "RAST_Annotated": 0,
+        "Annotated": 0,
         # "shock_id": "",
         "Upload_File" : "/kb/module/data/testingData/prodTrial.xlsx",
         # "list_name": "Genome_ID Classification\n679190.3.RAST   facultative\n665954.3.RAST  facultative\n470145.6.RAST  aerobic\n457391.3.RAST  aerobic\n485918.5.RAST  anaerobic\n411154.5.RAST    anaerobic\n309807.19.RAST   facultative\n269798.12.RAST aerobic\n216432.3.RAST  anaerobic",
@@ -294,7 +294,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         """
         """
         params = {
-        "RAST_Annotated": 1,
+        "Annotated": 1,
         "Upload_File": "prodTrialRAST.xlsx",
         "list_name": "Genome_ID	Classification\n262543.4.RAST	facultative\n1134785.3.RAST	facultative\n216432.3.RAST	aerobic\n269798.12.RAST	aerobic\n309807.19.RAST	aerobic\n411154.5.RAST	aerobic\n485917.5.RAST	aerobic\n485918.5.RAST	aerobic\n457391.3.RAST	anaerobic\n470145.6.RAST	anaerobic\n665954.3.RAST	anaerobic\n679190.3.RAST	anaerobic",
         "description": "myStagingTrial",
