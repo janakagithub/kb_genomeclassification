@@ -76,7 +76,7 @@ This module build a classifier and predict phenotypes based on the classifier An
         # return variables are: output
         #BEGIN build_classifier
 
-        print params
+        print(params)
 
         self.config['ctx'] = ctx
         clf_Runner = kb_genomeclfUtils(self.config)
@@ -84,10 +84,12 @@ This module build a classifier and predict phenotypes based on the classifier An
         #clf_Runner.fullClassify(params, params.get('workspace'))
         #output = {'random':'random','dict':'dict'}
 
-        location_of_report = clf_Runner.fullClassify(params, params.get('workspace'))
+        location_of_report, classifier_info_list, attribute_weights_list = clf_Runner.fullClassify(params, params.get('workspace'))
+        print("here is classifier_info_list" + str(classifier_info_list))
+        print("here is attribute_weights_list" + str(attribute_weights_list))
 
         report_output = clf_Runner.makeHtmlReport(location_of_report, params.get('workspace'), 'clf_Runner', params.get('description'))
-        output = {'report_name': report_output['name'], 'report_ref': report_output['ref']}
+        output = {'report_name': report_output['name'], 'report_ref': report_output['ref'], 'classifier_info': classifier_info_list, 'attribute_weights': attribute_weights_list }
 
         #END build_classifier
 
@@ -112,15 +114,16 @@ This module build a classifier and predict phenotypes based on the classifier An
         # return variables are: output
         #BEGIN predict_phenotype
 
-        print params
+        print(params)
 
         self.config['ctx'] = ctx
         pred_Runner = kb_genomeclfUtils(self.config)
 
-        location_of_report = pred_Runner.fullPredict(params, params.get('workspace'))
+        location_of_report, predictions_mapping = pred_Runner.fullPredict(params, params.get('workspace'))
+        print(predictions_mapping)
 
         report_output = pred_Runner.makeHtmlReport(location_of_report, params.get('workspace'), 'pred_Runner', params.get('description'), for_predict = True)
-        output = {'report_name': report_output['name'], 'report_ref': report_output['ref']}
+        output = {'report_name': report_output['name'], 'report_ref': report_output['ref'], 'predictions': predictions_mapping}
 
         #END predict_phenotype
 
@@ -149,15 +152,17 @@ This module build a classifier and predict phenotypes based on the classifier An
         # return variables are: output
         #BEGIN upload_trainingset
         
-        print params
+        print(params)
 
         self.config['ctx'] = ctx
         upload_Runner = kb_genomeclfUtils(self.config)
 
-        location_of_report = upload_Runner.fullUpload(params, params.get('workspace'))
+        location_of_report, classifier_training_set_mapping = upload_Runner.fullUpload(params, params.get('workspace'))
+
+        print(classifier_training_set_mapping)
 
         report_output = upload_Runner.makeHtmlReport(location_of_report, params.get('workspace'), 'upload_Runner', params.get('description'), for_predict = True)
-        output = {'report_name': report_output['name'], 'report_ref': report_output['ref']}
+        output = {'report_name': report_output['name'], 'report_ref': report_output['ref'], 'classifier_training_set': classifier_training_set_mapping}
 
         """
         mylist = self.ws_client.get_objects([{'workspace':params.get('workspace'), 'name':'forMRole'}])
