@@ -425,6 +425,7 @@ class kb_genomeclfUtils(object):
 
 		#after_classifier = pickle.loads(codecs.decode(base64str.encode(), "base64"))
 		pickle_in = open(clf_file_path, "rb")
+		print("Getting here 1.5")
 		after_classifier = pickle.load(pickle_in)
 
 		print("Getting to here 2")
@@ -2076,7 +2077,7 @@ class kb_genomeclfUtils(object):
 			'classifier_id' : '',
 			'classifier_type' : classifier_type, # Neural network
 			'classifier_name' : classifier_name,
-			#'classifier_data' : pickled,
+			'classifier_data' : pickled,
 			'classifier_handle_ref' : handle_id,
 			'classifier_description' : description,
 			'lib_name' : 'sklearn',
