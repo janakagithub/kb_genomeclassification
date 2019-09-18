@@ -120,18 +120,28 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # }
         # self.getImpl().predict_phenotype(self.getContext(), params)
 
+        # params = {
+        # "classifier_name": "FridayMeetingCLF",
+        # "description": "trial",
+        # "attribute": "functional_roles",
+        # "phenotypeclass": "trial",
+        # "list_name": "Genome_ID\nGCF_000216435.1\nGCF_000611305.1\nGCF_000216515.1\nGCF_000216495.1\nGCF_000216475.1",
+        # "Annotated": 1,
+        # "Upload_File": "",
+        # "workspace" : "sagoyal:narrative_1534292322496"
+        # }
+        # self.getImpl().predict_phenotype(self.getContext(), params)
         params = {
-        "classifier_name": "FridayMeetingCLF",
-        "description": "trial",
+        "classifier_name": "fridayCLF2",
+        "description": "slkdf",
         "attribute": "functional_roles",
-        "phenotypeclass": "trial",
-        "list_name": "Genome_ID\nGCF_000216435.1\nGCF_000611305.1\nGCF_000216515.1\nGCF_000216495.1\nGCF_000216475.1",
+        "phenotypeclass": "respir",
+        "list_name": "Genome_ID\n211586.1\n94122.5\n60480.16\n584.1\n615.1\n523791.4\n498211.3\n484022.4",
         "Annotated": 1,
         "Upload_File": "",
-        "workspace" : "sagoyal:narrative_1534292322496"
+        "workspace" : "sagoyal:narrative_1536939130038"
         }
         self.getImpl().predict_phenotype(self.getContext(), params)
-    
 
     def test_build_classifier(self):
     
@@ -254,8 +264,8 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # params = {
         # "save_ts": 1,
         # "description": "mywaydescription",
-        # "trainingset_name": "myWayTSEt",
-        # "phenotypeclass": "myway",
+        # "trainingset_name": "friday",
+        # "phenotypeclass": "fridayCLF2",
         # "classifier": "KNeighborsClassifier",
         # "attribute": "functional_roles",
         # "k_nearest_neighbors": None,
@@ -265,7 +275,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # "support_vector_machine": None,
         # "neural_network": None,
         # "ensemble_model": None,
-        # "classifier_out": "ForShockTesting",
+        # "classifier_out": "fridayCLF2",
         # "workspace" : "sagoyal:narrative_1536939130038"
         # }
         # self.getImpl().build_classifier(self.getContext(), params)
@@ -273,7 +283,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # params = {
         # "save_ts": 1,
         # "description": "mywaydescription",
-        # "trainingset_name": "FridayMeeting",
+        # "trainingset_name": "Friday",
         # "phenotypeclass": "myway",
         # "classifier": "KNeighborsClassifier",
         # "attribute": "functional_roles",
@@ -288,7 +298,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # "workspace" : "sagoyal:narrative_1534292322496"
         # }
         # self.getImpl().build_classifier(self.getContext(), params)
-        pass
+       
 
     def test_upload_trainingset(self):
         
@@ -349,6 +359,7 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # }
 
         # self.getImpl().upload_trainingset(self.getContext(), params)
+        pass
 
     # def test_test(self):
     #     self.dfu = DataFileUtil(self.callback_url)
