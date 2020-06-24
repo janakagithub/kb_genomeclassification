@@ -35,8 +35,8 @@
           "target_property": "phenotypeclass"
         },
         {
-          "input_parameter": "attribute",
-          "target_property": "attribute"
+          "input_parameter": "genome_attribute",
+          "target_property": "genome_attribute"
         },
         {
           "input_parameter": "logistic_regression",
@@ -319,9 +319,9 @@
             "value": "KNeighborsClassifier"
           },
           {
-            "display": "Gaussian Naive Base",
+            "display": "Gaussian Naive Bayes",
             "id": "GaussianNB",
-            "ui_name": "Gaussian Naive Base",
+            "ui_name": "Gaussian Naive Bayes",
             "value": "GaussianNB"
           },
           {
@@ -389,7 +389,7 @@
         ]
       },
       "field_type": "dropdown",
-      "id": "attribute",
+      "id": "genome_attribute",
       "optional": false
     },
     {

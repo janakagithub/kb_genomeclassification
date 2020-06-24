@@ -119,7 +119,7 @@ module kb_genomeclassification {
 
     typedef structure {
         string phenotypeclass;
-        string attribute;
+        string genome_attribute;
         string workspace;
         string trainingset_name;
         mapping <string genome_id,ClassifierTrainingSet> classifier_training_set;
@@ -181,24 +181,23 @@ module kb_genomeclassification {
    typedef structure {
         string workspace;
         string attribute;
-        string classifier_name;
+        string categorizer_name;
         string description;
-        string phenotypeclass;
-        string Upload_File;
-        string list_name;
-        int Annotated;
+        string phenotype;
+        string file_path;
+        int annotate;
     } ClassifierPredictionInput;
 
 
     typedef structure {
-        float prediction_accuracy;
+        float prediction_probabilities;
         string phenotype;
         string genome_name;
         string genome_ref;
     } PredictedPhenotypeOut;
 
    typedef structure {
-        mapping<string genome_id, PredictedPhenotypeOut> predictions;
+        mapping<string genome_id, PredictedPhenotypeOut> prediction_set;
         string report_name;
         string report_ref;
    }ClassifierPredictionOutput;
@@ -208,29 +207,26 @@ module kb_genomeclassification {
 
 
 	typedef structure {
-        string phenotypeclass;
+        string phenotype;
         string workspace;
         string description;
-        mapping <string genome_id,ClassifierTrainingSet> classifier_training_set;
-        string training_set_out;
-        string target;
-        string Upload_File;
-        int Annotated;
-        string list_name;
+        string training_set_name;
+        string file_path;
+        int annotate;
     }UploadTrainingSetInput;
 
     typedef structure {
         string phenotype;
         string genome_name;
         string genome_ref;
-        int load_status;
-        int RAST_annotation_status;
+        list<string> references;
+        list<string> evidence_types;
     } ClassifierTrainingSetOut;
 
 
 
     typedef structure {
-    	mapping <string genome_id,ClassifierTrainingSetOut> classifier_training_set;
+    	mapping <string genome_id, ClassifierTrainingSetOut> classifier_training_set;
         string report_name;
         string report_ref;
     }UploadTrainingSetOut;
