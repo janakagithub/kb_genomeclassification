@@ -118,18 +118,13 @@ module kb_genomeclassification {
     } EnsembleModelOptions;
 
     typedef structure {
-        string phenotypeclass;
         string genome_attribute;
         string workspace;
-        string trainingset_name;
+        string training_set_name;
         mapping <string genome_id,ClassifierTrainingSet> classifier_training_set;
-        string classifier_out;
-        string target;
+        string classifier_object_name;
         string description;
-        string classifier;
-        string shock_id;
-        string list_name;
-        int save_ts;
+        string classifier_to_run;
         LogisticRegressionOptions logistic_regression;
         DecisionTreeClassifierOptions decision_tree_classifier;
         GaussianNBOptions gaussian_nb;
@@ -139,28 +134,14 @@ module kb_genomeclassification {
         EnsembleModelOptions ensemble_model;
     }BuildClassifierInput;
 
-	typedef structure{
-		string attribute;
-		float weight;
-	}attributeWeights;
-
-	typedef structure{
-		string phenotypeclass;
-		float accuracy;
-		float precision;
-		float recall;
-		float f1score;
-	}phenotypeClassInfo;
 
 	typedef structure{
 		string classifier_name;
 		string classifier_ref;
-		list<phenotypeClassInfo> phenotype_class_info;
-		float averagef1;
+		float accuracy;
 	}classifierInfo;
 
     typedef structure {
-        list<attributeWeights> attribute_weights;
     	list<classifierInfo> classifier_info;
         string report_name;
         string report_ref;
@@ -177,13 +158,10 @@ module kb_genomeclassification {
         returns (ClassifierOut output) authentication required;
 
 
-
    typedef structure {
         string workspace;
-        string attribute;
         string categorizer_name;
         string description;
-        string phenotype;
         string file_path;
         int annotate;
     } ClassifierPredictionInput;
