@@ -52,7 +52,7 @@ class kb_genomeclfUtils(object):
 		folder_name = "forUpload"
 		os.makedirs(os.path.join(self.scratch, folder_name), exist_ok=True)
 
-		params["file_path"] = "/kb/module/data/RealData/GramDataEdit5.xlsx"
+		#params["file_path"] = "/kb/module/data/RealData/GramDataEdit5.xlsx"
 		uploaded_df = self.getUploadedFileAsDF(params["file_path"])
 		(upload_table, classifier_training_set, missing_genomes, genome_label) = self.createAndUseListsForTrainingSet(current_ws, params, uploaded_df)
 
@@ -84,7 +84,7 @@ class kb_genomeclfUtils(object):
 		(indicator_matrix, master_role_list) = self.createIndicatorMatrix(uploaded_df, params["genome_attribute"])
 
 		#split up training data
-		splits = 2 #5
+		splits = 10
 		whole_X = indicator_matrix[master_role_list].values
 		whole_Y = uploaded_df["Phenotype Enumeration"].values
 		(list_train_index, list_test_index) = self.getKSplits(splits, whole_X, whole_Y)
@@ -791,7 +791,7 @@ class kb_genomeclfUtils(object):
 
 
 		#Load Information from UploadedFile
-		params["file_path"] = "/kb/module/data/RealData/GramDataEdit5.xlsx"
+		#params["file_path"] = "/kb/module/data/RealData/GramDataEdit5.xlsx"
 		uploaded_df = self.getUploadedFileAsDF(params["file_path"])
 		(missing_genomes, genome_label, subset_uploaded_df, _in_workspace, _list_genome_name, _list_genome_ref) = self.createListsForPredictionSet(current_ws, params, uploaded_df)
 
