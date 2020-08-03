@@ -44,6 +44,8 @@ This module build a classifier and predict phenotypes based on the classifier An
         self.workspaceURL = config.get('workspace-url')
         self.scratch = os.path.abspath(config.get('scratch'))
         self.callback_url = os.environ['SDK_CALLBACK_URL']
+        #self.to_ws = os.environ['KB_NARRATIVE'].split('.')[1]
+        # self.to_ws = "36230"
         self.ws_client = workspaceService(self.workspaceURL)
 
         self.config['workspaceURL'] = self.workspaceURL
@@ -74,7 +76,6 @@ This module build a classifier and predict phenotypes based on the classifier An
         # if not isinstance(output, dict):
         #     raise ValueError('Method upload_trainingset return value ' +
         #                      'output is not type dict as required.')
-        # return the results
         return [output]
 
     def build_classifier(self, ctx, params):
@@ -98,7 +99,6 @@ This module build a classifier and predict phenotypes based on the classifier An
         # if not isinstance(output, dict):
         #     raise ValueError('Method build_classifier return value ' +
         #                      'output is not type dict as required.')
-        # return the results
         return [output]
 
     def predict_phenotype(self, ctx, params):
@@ -119,10 +119,9 @@ This module build a classifier and predict phenotypes based on the classifier An
         #END predict_phenotype
 
         # At some point might do deeper type checking...
-        if not isinstance(output, dict):
-            raise ValueError('Method predict_phenotype return value ' +
-                             'output is not type dict as required.')
-        # return the results
+        # if not isinstance(output, dict):
+        #     raise ValueError('Method predict_phenotype return value ' +
+        #                      'output is not type dict as required.')
         return [output]
 
     def status(self, ctx):
