@@ -1521,6 +1521,7 @@ class kb_genomeclfUtils(object):
 
 		params_RAST =	{
 		"input_text": ";".join(input_genomes),
+		#"input_text": "36230/794;36230/798;36230/799",
 		"output_workspace": current_ws,
 		"output_GenomeSet_name" : output_genome_set_name
 		}
