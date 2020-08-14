@@ -16,7 +16,7 @@ except:
     from configparser import ConfigParser  # py3
 
 
-from pprint import pprint  # noqa: F401
+from pprint import pprint 
 
 from biokbase.workspace.client import Workspace as workspaceService
 from kb_genomeclassification.kb_genomeclassificationImpl import kb_genomeclassification
@@ -83,16 +83,17 @@ class kb_genomeclassificationTest(unittest.TestCase):
         return self.__class__.ctx
 
     def test_upload_trainingset(self):
-        params = {
-        "annotate": 1,
-        "file_path": "fake_2_refseq.xlsx",
-        "description": "my description",
-        "phenotype": "my phenotype",
-        "training_set_name": "AgainRefSeq",
-        "workspace": "sagoyal:narrative_1536939130038",
-        "workspace_id":"36230"
-        }
-        self.getImpl().upload_trainingset(self.getContext(), params)
+        pass
+        # params = {
+        # "annotate": 0,
+        # "file_path": "fake_2_refseq.xlsx",
+        # "description": "my description",
+        # "phenotype": "my phenotype",
+        # "training_set_name": "AgainRefSeq",
+        # "workspace": "sagoyal:narrative_1536939130038",
+        # "workspace_id":"36230"
+        # }
+        # self.getImpl().upload_trainingset(self.getContext(), params)
 
         # params =    {
         # "annotate": 0,
@@ -104,6 +105,15 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # }
         # self.getImpl().upload_trainingset(self.getContext(), params)
 
+    def test_rast_annotate_trainingset(self):
+
+        params =    {
+        "training_set_name": "AgainRefSeq",
+        "description": "whatever",
+        "annotated_trainingset_name": "AnnoatedAgainRefSeq",
+        "workspace": "sagoyal:narrative_1536939130038"
+        }
+        self.getImpl().rast_annotate_trainingset(self.getContext(), params)
 
     def test_build_classifier(self):
         pass
@@ -223,7 +233,8 @@ class kb_genomeclassificationTest(unittest.TestCase):
         # "annotate": 0,
         # "file_path": "GramDataEdit5.xlsx",
         # "description": "my predict phenotype description",
-        # "workspace": "sagoyal:narrative_1536939130038"
+        # "workspace": "sagoyal:narrative_1536939130038",
+        # "workspace_id":"36230"
         # }
         # self.getImpl().predict_phenotype(self.getContext(), params)
 
